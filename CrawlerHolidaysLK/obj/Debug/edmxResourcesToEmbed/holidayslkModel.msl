@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="holidayslkModelStoreContainer" CdmEntityContainer="holidayslkEntities">
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="holidayslkModel.Activity">
+        <MappingFragment StoreEntitySet="Activities">
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+          <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelFacilities">
+      <EntityTypeMapping TypeName="holidayslkModel.HotelFacility">
+        <MappingFragment StoreEntitySet="HotelFacilities">
+          <ScalarProperty Name="HotelFacilityId" ColumnName="HotelFacilityId" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelTags">
+      <EntityTypeMapping TypeName="holidayslkModel.HotelTag">
+        <MappingFragment StoreEntitySet="HotelTags">
+          <ScalarProperty Name="HotelTagId" ColumnName="HotelTagId" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PropertyTypes">
+      <EntityTypeMapping TypeName="holidayslkModel.PropertyType">
+        <MappingFragment StoreEntitySet="PropertyTypes">
+          <ScalarProperty Name="PropertyTypeId" ColumnName="PropertyTypeId" />
+          <ScalarProperty Name="PropertyTypeName" ColumnName="PropertyTypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="holidayslkModel.Tag">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facilities">
+      <EntityTypeMapping TypeName="holidayslkModel.Facility">
+        <MappingFragment StoreEntitySet="Facilities">
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelActivities">
+      <EntityTypeMapping TypeName="holidayslkModel.HotelActivity">
+        <MappingFragment StoreEntitySet="HotelActivities">
+          <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="HotelActivityId" ColumnName="HotelActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelImages">
+      <EntityTypeMapping TypeName="holidayslkModel.HotelImage">
+        <MappingFragment StoreEntitySet="HotelImages">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+          <ScalarProperty Name="HotelImageId" ColumnName="HotelImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="holidayslkModel.City">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CityImage" ColumnName="CityImage" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="holidayslkModel.Country">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CountryImage" ColumnName="CountryImage" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hotels">
+      <EntityTypeMapping TypeName="holidayslkModel.Hotel">
+        <MappingFragment StoreEntitySet="Hotels">
+          <ScalarProperty Name="LastSyncOn" ColumnName="LastSyncOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="BookingAffiliate" ColumnName="BookingAffiliate" />
+          <ScalarProperty Name="BookingURL" ColumnName="BookingURL" />
+          <ScalarProperty Name="LocationGoogleMap" ColumnName="LocationGoogleMap" />
+          <ScalarProperty Name="Parking" ColumnName="Parking" />
+          <ScalarProperty Name="Internet" ColumnName="Internet" />
+          <ScalarProperty Name="Pets" ColumnName="Pets" />
+          <ScalarProperty Name="ChildrenAndExtraBed" ColumnName="ChildrenAndExtraBed" />
+          <ScalarProperty Name="PropertyTypeId" ColumnName="PropertyTypeId" />
+          <ScalarProperty Name="Stars" ColumnName="Stars" />
+          <ScalarProperty Name="CheckOutText" ColumnName="CheckOutText" />
+          <ScalarProperty Name="CheckInText" ColumnName="CheckInText" />
+          <ScalarProperty Name="CheckOutTimeTo" ColumnName="CheckOutTimeTo" />
+          <ScalarProperty Name="CheckOutTimeFrom" ColumnName="CheckOutTimeFrom" />
+          <ScalarProperty Name="CheckInTimeTo" ColumnName="CheckInTimeTo" />
+          <ScalarProperty Name="CheckInTimeFrom" ColumnName="CheckInTimeFrom" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Distric" ColumnName="Distric" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Town" ColumnName="Town" />
+          <ScalarProperty Name="AddressLine" ColumnName="AddressLine" />
+          <ScalarProperty Name="HotelDesc" ColumnName="HotelDesc" />
+          <ScalarProperty Name="HotelShortDesc" ColumnName="HotelShortDesc" />
+          <ScalarProperty Name="HotelName" ColumnName="HotelName" />
+          <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

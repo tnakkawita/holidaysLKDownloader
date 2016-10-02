@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="holidayslkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="ActivityId" />
+    </Key>
+    <Property Name="ActivityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActivityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="HotelActivities" Relationship="holidayslkModel.FK_HotelActivities_Activities" FromRole="Activity" ToRole="HotelActivity" />
+  </EntityType>
+  <EntityType Name="HotelFacility">
+    <Key>
+      <PropertyRef Name="HotelFacilityId" />
+    </Key>
+    <Property Name="HotelFacilityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelId" Type="Int64" Nullable="false" />
+    <Property Name="FacilityId" Type="Int64" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Facility" Relationship="holidayslkModel.FK_HotelFacilities_Facilities" FromRole="HotelFacility" ToRole="Facility" />
+    <NavigationProperty Name="Hotel" Relationship="holidayslkModel.FK_HotelFacilities_Hotels" FromRole="HotelFacility" ToRole="Hotel" />
+  </EntityType>
+  <EntityType Name="HotelTag">
+    <Key>
+      <PropertyRef Name="HotelTagId" />
+    </Key>
+    <Property Name="HotelTagId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelId" Type="Int64" Nullable="false" />
+    <Property Name="TagId" Type="Int64" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Hotel" Relationship="holidayslkModel.FK_HotelTags_Tag" FromRole="HotelTag" ToRole="Hotel" />
+  </EntityType>
+  <EntityType Name="PropertyType">
+    <Key>
+      <PropertyRef Name="PropertyTypeId" />
+    </Key>
+    <Property Name="PropertyTypeId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertyTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hotels" Relationship="holidayslkModel.FK_Hotels_PropertyTypes" FromRole="PropertyType" ToRole="Hotel" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="holidayslkEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Activities" EntityType="Self.Activity" />
+    <EntitySet Name="HotelFacilities" EntityType="Self.HotelFacility" />
+    <EntitySet Name="HotelTags" EntityType="Self.HotelTag" />
+    <EntitySet Name="PropertyTypes" EntityType="Self.PropertyType" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
+    <EntitySet Name="Facilities" EntityType="holidayslkModel.Facility" />
+    <AssociationSet Name="FK_HotelFacilities_Facilities" Association="holidayslkModel.FK_HotelFacilities_Facilities">
+      <End Role="Facility" EntitySet="Facilities" />
+      <End Role="HotelFacility" EntitySet="HotelFacilities" />
+    </AssociationSet>
+    <EntitySet Name="HotelActivities" EntityType="holidayslkModel.HotelActivity" />
+    <AssociationSet Name="FK_HotelActivities_Activities" Association="holidayslkModel.FK_HotelActivities_Activities">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="HotelActivity" EntitySet="HotelActivities" />
+    </AssociationSet>
+    <EntitySet Name="HotelImages" EntityType="holidayslkModel.HotelImage" />
+    <EntitySet Name="Cities" EntityType="holidayslkModel.City" />
+    <EntitySet Name="Countries" EntityType="holidayslkModel.Country" />
+    <EntitySet Name="Hotels" EntityType="holidayslkModel.Hotel" />
+    <AssociationSet Name="FK_Cities_Countries" Association="holidayslkModel.FK_Cities_Countries">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelActivities_Hotels" Association="holidayslkModel.FK_HotelActivities_Hotels">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="HotelActivity" EntitySet="HotelActivities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelFacilities_Hotels" Association="holidayslkModel.FK_HotelFacilities_Hotels">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="HotelFacility" EntitySet="HotelFacilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelImage_Hotel" Association="holidayslkModel.FK_HotelImage_Hotel">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="HotelImage" EntitySet="HotelImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hotels_PropertyTypes" Association="holidayslkModel.FK_Hotels_PropertyTypes">
+      <End Role="PropertyType" EntitySet="PropertyTypes" />
+      <End Role="Hotel" EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelTags_Tag" Association="holidayslkModel.FK_HotelTags_Tag">
+      <End Role="Hotel" EntitySet="Hotels" />
+      <End Role="HotelTag" EntitySet="HotelTags" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="FacilityId" />
+    </Key>
+    <Property Name="FacilityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HotelFacilities" Relationship="holidayslkModel.FK_HotelFacilities_Facilities" FromRole="Facility" ToRole="HotelFacility" />
+  </EntityType>
+  <Association Name="FK_HotelFacilities_Facilities">
+    <End Type="holidayslkModel.Facility" Role="Facility" Multiplicity="1" />
+    <End Type="holidayslkModel.HotelFacility" Role="HotelFacility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="FacilityId" />
+      </Principal>
+      <Dependent Role="HotelFacility">
+        <PropertyRef Name="FacilityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HotelActivity">
+    <Key>
+      <PropertyRef Name="HotelActivityId" />
+    </Key>
+    <Property Name="HotelActivityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelId" Type="Int64" />
+    <Property Name="ActivityId" Type="Int64" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Activity" Relationship="holidayslkModel.FK_HotelActivities_Activities" FromRole="HotelActivity" ToRole="Activity" />
+    <NavigationProperty Name="Hotel" Relationship="holidayslkModel.FK_HotelActivities_Hotels" FromRole="HotelActivity" ToRole="Hotel" />
+  </EntityType>
+  <Association Name="FK_HotelActivities_Activities">
+    <End Type="holidayslkModel.Activity" Role="Activity" Multiplicity="0..1" />
+    <End Type="holidayslkModel.HotelActivity" Role="HotelActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="ActivityId" />
+      </Principal>
+      <Dependent Role="HotelActivity">
+        <PropertyRef Name="ActivityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HotelImage">
+    <Key>
+      <PropertyRef Name="HotelImageId" />
+    </Key>
+    <Property Name="HotelImageId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelId" Type="Int64" Nullable="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsMain" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Hotel" Relationship="holidayslkModel.FK_HotelImage_Hotel" FromRole="HotelImage" ToRole="Hotel" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CityName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CityImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int64" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="holidayslkModel.FK_Cities_Countries" FromRole="City" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountryImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Cities" Relationship="holidayslkModel.FK_Cities_Countries" FromRole="Country" ToRole="City" />
+  </EntityType>
+  <EntityType Name="Hotel">
+    <Key>
+      <PropertyRef Name="HotelId" />
+    </Key>
+    <Property Name="HotelId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HotelName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="HotelShortDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HotelDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Town" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CityId" Type="Int64" />
+    <Property Name="Distric" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int64" />
+    <Property Name="CheckInTimeFrom" Type="Time" Precision="7" />
+    <Property Name="CheckInTimeTo" Type="Time" Precision="7" />
+    <Property Name="CheckOutTimeFrom" Type="Time" Precision="7" />
+    <Property Name="CheckOutTimeTo" Type="Time" Precision="7" />
+    <Property Name="CheckInText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CheckOutText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Stars" Type="Int32" />
+    <Property Name="PropertyTypeId" Type="Int64" Nullable="false" />
+    <Property Name="ChildrenAndExtraBed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Pets" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Internet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Parking" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LocationGoogleMap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BookingURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BookingAffiliate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="LastSyncOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="HotelActivities" Relationship="holidayslkModel.FK_HotelActivities_Hotels" FromRole="Hotel" ToRole="HotelActivity" />
+    <NavigationProperty Name="HotelFacilities" Relationship="holidayslkModel.FK_HotelFacilities_Hotels" FromRole="Hotel" ToRole="HotelFacility" />
+    <NavigationProperty Name="HotelImages" Relationship="holidayslkModel.FK_HotelImage_Hotel" FromRole="Hotel" ToRole="HotelImage" />
+    <NavigationProperty Name="PropertyType" Relationship="holidayslkModel.FK_Hotels_PropertyTypes" FromRole="Hotel" ToRole="PropertyType" />
+    <NavigationProperty Name="HotelTags" Relationship="holidayslkModel.FK_HotelTags_Tag" FromRole="Hotel" ToRole="HotelTag" />
+  </EntityType>
+  <Association Name="FK_Cities_Countries">
+    <End Type="holidayslkModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="holidayslkModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelActivities_Hotels">
+    <End Type="holidayslkModel.Hotel" Role="Hotel" Multiplicity="0..1" />
+    <End Type="holidayslkModel.HotelActivity" Role="HotelActivity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="HotelId" />
+      </Principal>
+      <Dependent Role="HotelActivity">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelFacilities_Hotels">
+    <End Type="holidayslkModel.Hotel" Role="Hotel" Multiplicity="1" />
+    <End Type="holidayslkModel.HotelFacility" Role="HotelFacility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="HotelId" />
+      </Principal>
+      <Dependent Role="HotelFacility">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelImage_Hotel">
+    <End Type="holidayslkModel.Hotel" Role="Hotel" Multiplicity="1" />
+    <End Type="holidayslkModel.HotelImage" Role="HotelImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="HotelId" />
+      </Principal>
+      <Dependent Role="HotelImage">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hotels_PropertyTypes">
+    <End Type="holidayslkModel.PropertyType" Role="PropertyType" Multiplicity="1" />
+    <End Type="holidayslkModel.Hotel" Role="Hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PropertyType">
+        <PropertyRef Name="PropertyTypeId" />
+      </Principal>
+      <Dependent Role="Hotel">
+        <PropertyRef Name="PropertyTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelTags_Tag">
+    <End Type="holidayslkModel.Hotel" Role="Hotel" Multiplicity="1" />
+    <End Type="holidayslkModel.HotelTag" Role="HotelTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hotel">
+        <PropertyRef Name="HotelId" />
+      </Principal>
+      <Dependent Role="HotelTag">
+        <PropertyRef Name="HotelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9b812bbb5abd45c4804efffa3121638c" Name="Diagram1">
+        <EntityTypeShape EntityType="holidayslkModel.Activity" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="holidayslkModel.HotelFacility" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="holidayslkModel.HotelTag" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="holidayslkModel.PropertyType" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="holidayslkModel.Tag" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="holidayslkModel.Facility" Width="1.5" PointX="8.375" PointY="0.875" />
+        <AssociationConnector Association="holidayslkModel.FK_HotelFacilities_Facilities" />
+        <EntityTypeShape EntityType="holidayslkModel.HotelActivity" Width="1.5" PointX="5.25" PointY="4.75" />
+        <AssociationConnector Association="holidayslkModel.FK_HotelActivities_Activities" />
+        <EntityTypeShape EntityType="holidayslkModel.HotelImage" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="holidayslkModel.City" Width="1.5" PointX="9.625" PointY="9.875" />
+        <EntityTypeShape EntityType="holidayslkModel.Country" Width="1.5" PointX="7.375" PointY="10" />
+        <EntityTypeShape EntityType="holidayslkModel.Hotel" Width="1.5" PointX="3" PointY="3.625" />
+        <AssociationConnector Association="holidayslkModel.FK_Cities_Countries" />
+        <AssociationConnector Association="holidayslkModel.FK_HotelActivities_Hotels" />
+        <AssociationConnector Association="holidayslkModel.FK_HotelFacilities_Hotels" />
+        <AssociationConnector Association="holidayslkModel.FK_HotelImage_Hotel" />
+        <AssociationConnector Association="holidayslkModel.FK_Hotels_PropertyTypes" />
+        <AssociationConnector Association="holidayslkModel.FK_HotelTags_Tag" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
