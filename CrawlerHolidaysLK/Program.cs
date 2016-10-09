@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Supremes;
+using Supremes.Nodes;
 
 namespace CrawlerHolidaysLK
 {
@@ -13,7 +15,7 @@ namespace CrawlerHolidaysLK
     {
         static void Main(string[] args)
         {
-         //   DownLoadHotels();
+            DownLoadHotels();
             CrawleHotelInfo();
         }
 
@@ -22,7 +24,10 @@ namespace CrawlerHolidaysLK
             Console.WriteLine("New hotel data download is started");
             using (var db = new holidayslkEntities())
             {
-                var doc = Dcsoup.Parse(new Uri("http://www.booking.com/searchresults.html?aid=304142&label=gen173nr-1DCAsohQFCGmJlc3Qtd2VzdGVybi1lbHlvbi1jb2xvbWJvSDNiBW5vcmVmaIUBiAEBmAExuAEGyAEM2AED6AEB-AECqAID&sid=3666bc022d8e0188b8689070c947b0aa&city=-2214877&class_interval=1&group_adults=2&group_children=0&hlrd=0&label_click=undef&no_rooms=1&review_score_group=empty&room1=A%2CA&sb_price_type=total&score_min=0&ssb=empty&rows=15&offset=15"), 5000);
+                var crawlingURL =
+                    "http://www.booking.com/searchresults.html?label=gen173nr-1FCAEoggJCAlhYSDNiBW5vcmVmaIUBiAEBmAExuAEGyAEM2AEB6AEB-AECqAID&sid=3666bc022d8e0188b8689070c947b0aa&checkin_year_month_monthday=2016-10-10&checkout_year_month_monthday=2016-10-11&city=-2219694&class_interval=1&dtdisc=0&hlrd=0&hyb_red=0&inac=0&label_click=undef&nha_red=0&postcard=0&redirected_from_city=0&redirected_from_landmark=0&redirected_from_region=0&review_score_group=empty&room1=A%2CA&sb_price_type=total&score_min=0&ss_all=0&ssb=empty&sshis=0&order=class";
+                //var crawlingURL = ConfigurationManager.AppSettings["CrawlingURL"];
+                var doc = Dcsoup.Parse(new Uri(crawlingURL), 5000);
 
                 var hotelsList = doc.Select("div[id=hotellist_inner]").First().Children.ToList();
                 foreach (var hotelRec in hotelsList)
@@ -38,9 +43,9 @@ namespace CrawlerHolidaysLK
                             var link = head.Select("a").Attr("href");
                             var istars = head.First.Children;
                             var star = "";
-                            if (istars != null && istars.Count > 1)
+                            if (istars != null && istars.Count > 1 && istars[1].Text.Trim().ToLower().Contains("star"))
                             {
-                                star = istars[1].Text.Trim().Replace("-star hotel", "").Replace("stars","").Replace("star","");
+                                star = istars[1].Text.Trim().ToLower().Replace("-star hotel", "").Replace("stars", "").Replace("star", "");
                             }
                             
                             if (!String.IsNullOrEmpty(link))
@@ -59,6 +64,8 @@ namespace CrawlerHolidaysLK
                                 hotel.IsActive = true;
                                 db.Hotels.Add(hotel);
                                 db.SaveChanges();
+
+                                Console.WriteLine("New hotel added: " + name);
                             }
                         }
                     }
@@ -73,7 +80,8 @@ namespace CrawlerHolidaysLK
             Console.WriteLine("Hotel data synchronization is stared");
             using (var db = new holidayslkEntities())
             {
-                var hotels = (from h in db.Hotels where h.IsActive == true select h).ToList();
+                var hotels = (from h in db.Hotels where h.IsActive == true orderby !h.LastSyncOn.HasValue ? 1 : h.HotelId select h).ToList();
+                hotels = hotels.Where(c => !c.LastSyncOn.HasValue).ToList();
                 foreach (var hotel in hotels)
                 {
                     var hotelUrl = hotel.BookingURL;
@@ -330,7 +338,23 @@ namespace CrawlerHolidaysLK
 
 
                     var photoWrapper = doc.Select("div[id=photo_wrapper]");
-                    var photos = photoWrapper.First.Children.Select("div[class=hp-gallery-slides]").First.Children.Take(10).ToList();
+                    List<Element> photos = new List<Element>();
+                    if (photoWrapper.First != null)
+                    {
+                        photos = photoWrapper.First.Children.Select("div[class=hp-gallery-slides]")
+                            .First.Children.Take(10)
+                            .ToList();
+                    }
+                    else
+                    {
+                        var mainContent = doc.Select("div[id=hotel_main_content]");
+                        if (mainContent.First != null && mainContent.First.Children.Count > 0 && mainContent.First.Children.First != null)
+                        {
+                            var photoGrid = mainContent.First.Children.First.Children.Select("a");
+                            photos = photoGrid.Select("img").ToList();
+                        }
+                       
+                    }
 
                     foreach (var photo in photos)
                     {
@@ -359,6 +383,9 @@ namespace CrawlerHolidaysLK
 
                     hotel.LastSyncOn = DateTime.Now;
                     db.SaveChanges();
+
+
+                    Console.WriteLine("Sync hotel: " + hotel.HotelName);
                 }
             }
 

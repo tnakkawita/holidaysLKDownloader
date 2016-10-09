@@ -9,3 +9,13 @@ c:\users\thilina.nakkawita\documents\visual studio 2013\Projects\CrawlerHolidays
 c:\users\thilina.nakkawita\documents\visual studio 2013\Projects\CrawlerHolidaysLK\CrawlerHolidaysLK\obj\Debug\CrawlerHolidaysLK.csprojResolveAssemblyReference.cache
 c:\users\thilina.nakkawita\documents\visual studio 2013\Projects\CrawlerHolidaysLK\CrawlerHolidaysLK\obj\Debug\CrawlerHolidaysLK.exe
 c:\users\thilina.nakkawita\documents\visual studio 2013\Projects\CrawlerHolidaysLK\CrawlerHolidaysLK\obj\Debug\CrawlerHolidaysLK.pdb
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\CrawlerHolidaysLK.exe.config
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\CrawlerHolidaysLK.exe
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\CrawlerHolidaysLK.pdb
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\EntityFramework.dll
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\EntityFramework.SqlServer.dll
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\Supremes.dll
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\EntityFramework.xml
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\bin\Debug\EntityFramework.SqlServer.xml
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\obj\Debug\CrawlerHolidaysLK.exe
+D:\Personal\Projects\Sources\HolidaysLK\holidaysLKDownloader\CrawlerHolidaysLK\obj\Debug\CrawlerHolidaysLK.pdb
